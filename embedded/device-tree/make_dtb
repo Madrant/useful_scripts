@@ -1,0 +1,129 @@
+#!/bin/bash
+
+set -x
+set -e
+
+KERNEL_PATH="/home/user/repo/boot/power-pc/kernel/linux-xilinx-14.6.02"
+
+DTC=$KERNEL_PATH"/scripts/dtc/dtc"
+DTC_DEFAULT_OPTIONS="-I dts -O dtb"
+
+MAC_FILE="/opt/dtb/.mac"
+VENDOR_ID="00 0A 35" #Xilinx unique id
+MAC_VALUE="00 00 00" #3 octets - device id
+
+#************************************************************************************************
+print_help() {
+    echo "$0 - prepare and compile dts (device tree source) into a dtb (device tree binary)"
+    echo "$0 [-o dtb name] device-tree.dts"
+    exit 0
+}
+
+parse_options() {
+    #args number is 1 or 3
+    if [ $# -gt 3 -o $# -lt 1 -o $# -eq 2 ]
+    then
+        print_help
+    fi
+
+    if [ $# -eq 1 ]
+    then
+        DTS=$1
+    fi
+
+    if [ $# -eq 3 ]
+    then
+        if [ "$1" == "-o" ]
+        then
+            DTB=$2
+            DTS=$3
+        else
+            print_help
+        fi
+    fi
+}
+
+if_file_not_exist() {
+    local file=$1
+    local message=$2
+
+    if [ ! -f $file ]
+    then
+        echo $message
+        exit 1
+    fi
+}
+
+remove_clrf() {
+    echo "Removing CL+RF symbols (Windows style row separator)"
+    sed -i 's/\r//g' $1
+}
+
+check_mac_file() {
+    if [ ! -f $MAC_FILE ]
+    then
+        echo "$MAC_FILE not present, initializing"
+        echo "0" > $MAC_FILE
+    fi
+}
+
+generate_new_MAC() {
+    local counter=`cat $MAC_FILE`
+    counter=$((counter + 1))
+
+    local octets=`printf '%.6x' $counter`
+
+    tmp=${octets%??}
+
+    oct1=${octets%????}
+    oct2=${tmp#??}
+    oct3=${octets#????}
+
+    MAC_VALUE="$VENDOR_ID $oct1 $oct2 $oct3"
+
+    echo $counter > $MAC_FILE
+}
+
+compile_dts() {
+    if [ -z $DTB ]
+    then
+        DTB=`echo $1 | sed 's/dts$/dtb/g'`
+    fi
+
+    echo "Compiling device tree \"$1\""
+    echo "$DTC $DTC_DEFAULT_OPTIONS -o $DTB $1"
+    $DTC $DTC_DEFAULT_OPTIONS -o $DTB $1
+}
+#************************************************************************************************
+
+parse_options $@
+
+echo "Linux kernel path: \"$KERNEL_PATH\""
+
+if_file_not_exist $DTC "device tree compiler \"$DTC\" not found in kernel tree - compile it first"
+echo "Device tree compiler found as \"$DTC\""
+
+if_file_not_exist $DTC "device tree compiler \"$DTC\" not found in kernel tree - compile it first"
+
+remove_clrf $DTS
+
+check_mac_file
+
+echo "Searching for 'local-mac-address' section and generating new MACs"
+
+#Get lines number for sections "local-mac-address = [MAC]"
+lines=`grep -n local-mac-address $DTS | cut -f1 -d:`
+
+for line in $lines
+do
+    generate_new_MAC
+    new_string="local-mac-address = [$MAC_VALUE];"
+
+    #replace old section by generated one
+    sed -i -e "$line,$line""s/local-mac-address.*/$new_string/" $DTS
+
+    string=`sed -n "$line""p" $DTS`
+    echo "line $line: $string"
+done
+
+compile_dts $DTS
