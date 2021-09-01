@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+# Options and variables
+SCRIPT_DIR="$(dirname $(readlink -f "${0}"))"
+SCRIPT_PATH="${SCRIPT_DIR}/$(basename "${0}")"
+SCRIPT_NAME="$(basename "${0}")"
+
+PARENT_DIR=$(dirname "${SCRIPT_DIR}")
+CURRENT_DIR=$(pwd)
+
+GRUB_UPDATE=/usr/sbin/update-grub
+
+# Functions
+check_cmd() {
+    if ! type "$1" 1>/dev/null 2>/dev/null
+    then
+       echo "Error: Command '$1' not found - please install '$1' and try again"
+       exit 1
+    fi
+}
+
+check_package() {
+    if ! dpkg -l | grep "$1" 1>/dev/null 2>/dev/null
+    then
+       echo "Error: Package '$1' not found - please install package '$1' and try again"
+       exit 1
+    fi
+}
+
+# Check for required packcages
+check_package "grub-common"
+
+check_cmd "sudo"
+check_cmd "${GRUB_UPDATE}"
+check_cmd "boot-remount"
+
+# Request super-user rights
+if [ "$(id -u)" -ne 0 ]; then
+	echo "Requesting super-user rights..."
+	sudo echo "Rights granted"
+fi
+
+# Get user confirmation for update-grub
+yn="nope"
+
+while [ "${yn}" != "n" ] && [ "${yn}" != "y" ]
+do
+    read -p "Please confirm: GRUB bootloader configuration will be updated [y/n] [Ctrl+C to exit]:" yn
+done
+
+if [ "${yn}" == "n" ]; then
+    echo "Rejected by user"
+    exit 1
+fi
+
+# Remount selected mount point to 'rw' mode
+sudo boot-remount "rw"
+
+# Call update-grub
+echo "Calling '${GRUB_UPDATE}'"
+sudo "${GRUB_UPDATE}"
+echo "'${GRUB_UPDATE}' completed"
+
+# Remount back to 'ro' mode
+sudo boot-remount "ro"
+
+exit 0

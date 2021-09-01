@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+# Options and variables
+SCRIPT_DIR="$(dirname $(readlink -f "${0}"))"
+SCRIPT_PATH="${SCRIPT_DIR}/$(basename "${0}")"
+SCRIPT_NAME="$(basename "${0}")"
+
+PARENT_DIR=$(dirname "${SCRIPT_DIR}")
+CURRENT_DIR=$(pwd)
+
+# Functions
+check_cmd() {
+    if ! type "$1" 1>/dev/null 2>/dev/null
+    then
+       echo "Error: Command '$1' not found - please install '$1' and try again"
+       exit 1
+    fi
+}
+
+# Check command line parameters
+MODE="${1}"
+echo "Target moount options: ${1}"
+
+if [ "${MODE}" != "rw" ] && [ "${MODE}" != "ro" ]; then
+    echo "${SCRIPT_NAME}: Incorrect mount options provided: ${MODE}"
+    echo "Possibly values: 'rw'/'ro'"
+    exit 1
+fi
+
+# Check for required commands
+check_cmd "sudo"
+check_cmd "grep"
+check_cmd "awk"
+check_cmd "tr"
+check_cmd "mount"
+
+# Search for /boot mount point:
+echo -n "Looking for /boot partition mount point..."
+BOOT_MOUNT_POINT=$(df -h /boot | tail --lines=+2 | awk '{print $6}')
+BOOT_DEVICE=$(df -h /boot | tail --lines=+2 | awk '{print $1}')
+echo "'${BOOT_MOUNT_POINT}'"
+
+# Look for /boot mount options
+echo -n "Looking for /boot partition mount options..."
+IFS=$',' BOOT_MOUNT_OPTIONS=($(mount | grep "${BOOT_DEVICE}" | grep "${BOOT_MOUNT_POINT}" | awk '{print $6}' | tr -d \(\)))
+echo "'${BOOT_MOUNT_OPTIONS}'"
+
+# Check /boot mount point for 'ro' mount option
+mounted_ro=0
+
+for o in "${BOOT_MOUNT_OPTIONS[@]}"
+do
+    if [ "${o}" == "ro" ]; then
+        mounted_ro=1
+    fi
+done
+
+# Check if it is nothing to do
+if [ "${mounted_ro}" -eq 1 ] && [ "${MODE}" == "ro" ]; then
+    echo "Mount point '${BOOT_MOUNT_POINT}' already in 'ro' mode - no remount required"
+    exit 0
+fi
+
+if [ "${mounted_ro}" -ne 1 ] && [ "${MODE}" == "rw" ]; then
+    echo "Mount point '${BOOT_MOUNT_POINT}' not in 'ro' mode - no remount required"
+    exit 0
+fi
+
+# Request super-user rights
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Requesting super-user rights..."
+    sudo echo "Rights granted"
+fi
+
+# Perform remount with ${MODE}
+echo -n "${BOOT_MOUNT_POINT}: remounting with '${MODE}' option..."
+sudo mount -o "remount,${MODE}" "${BOOT_MOUNT_POINT}"
+
+echo "Remount completed: '${BOOT_MOUNT_POINT}'"
+mount | grep "${BOOT_DEVICE}" | grep "${BOOT_MOUNT_POINT}"
+
+exit 0
