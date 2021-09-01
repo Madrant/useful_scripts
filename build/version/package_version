@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+FILE="${1}"
+VERSION_TYPE="${2}"
+
+version=$(cat "${FILE}")
+
+if [ "${VERSION_TYPE}" = "" ]; then
+    echo "${version}"
+    exit 0
+fi
+
+if [ "${VERSION_TYPE}" = "major" ]; then
+    echo $(echo ${version} | sed 's/\./ /g' | gawk '{ print $1 }')
+    exit 0
+fi
+
+if [ "${VERSION_TYPE}" = "minor" ]; then
+    echo $(echo ${version} | sed 's/\./ /g' | gawk '{ print $2 }')
+    exit 0
+fi
+
+if [ "${VERSION_TYPE}" = "patch" ]; then
+    echo $(echo ${version} | sed 's/\./ /g' | gawk '{ print $3 }')
+    exit 0
+fi

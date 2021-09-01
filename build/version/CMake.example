@@ -1,0 +1,26 @@
+# Get a package version using 'package_version' script
+execute_process(
+    COMMAND ${CMAKE_SOURCE_DIR}/package_version ${CMAKE_SOURCE_DIR}/version
+    OUTPUT_VARIABLE PACKAGE_VERSION
+)
+string(REGEX REPLACE "\n$" "" PACKAGE_VERSION "${PACKAGE_VERSION}")
+
+execute_process(
+    COMMAND ${CMAKE_SOURCE_DIR}/package_version ${CMAKE_SOURCE_DIR}/version major
+    OUTPUT_VARIABLE PACKAGE_VERSION_MAJOR
+)
+string(REGEX REPLACE "\n$" "" PACKAGE_VERSION_MAJOR "${PACKAGE_VERSION_MAJOR}")
+
+execute_process(
+    COMMAND ${CMAKE_SOURCE_DIR}/package_version ${CMAKE_SOURCE_DIR}/version minor
+    OUTPUT_VARIABLE PACKAGE_VERSION_MINOR
+)
+string(REGEX REPLACE "\n$" "" PACKAGE_VERSION_MINOR "${PACKAGE_VERSION_MINOR}")
+
+execute_process(
+    COMMAND ${CMAKE_SOURCE_DIR}/package_version ${CMAKE_SOURCE_DIR}/version patch
+    OUTPUT_VARIABLE PACKAGE_VERSION_PATCH
+)
+string(REGEX REPLACE "\n$" "" PACKAGE_VERSION_PATCH "${PACKAGE_VERSION_PATCH}")
+
+message("Package version: '${PACKAGE_VERSION}'")
