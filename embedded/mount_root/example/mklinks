@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ln -s ../mount_root check_reboot
+ln -s ../mount_root mount_root_rw
+ln -s ../mount_root mount_root_ro
+

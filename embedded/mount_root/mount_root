@@ -1,0 +1,98 @@
+#!/bin/sh
+
+#Options and variables
+MOUNT=/bin/mount
+SYNC=/bin/sync
+
+RO_OPTS=ro,noatime,nodiratime
+RW_OPTS=rw,noatime,nodiratime
+
+ROOT_DIR=/
+
+APP_NAME=`basename $0`
+
+FIRST_BOOT_MARK="/.first_boot"
+REBOOT_REQUIRED_MARK="/.reboot_required"
+
+#Functions
+mount_root_ro() {
+    echo "$MOUNT -o remount,$RO_OPTS $ROOT_DIR"
+    $MOUNT -o remount,$RO_OPTS $ROOT_DIR
+}
+
+mount_root_rw() {
+    echo "$MOUNT -o remount,$RW_OPTS $ROOT_DIR"
+    $MOUNT -o remount,$RW_OPTS $ROOT_DIR
+}
+
+#mount_root_ro
+if [ $APP_NAME = "mount_root_ro" ]
+then
+    $SYNC
+    mount_root_ro
+    exit 0
+fi
+
+#mount_root_rw
+if [ $APP_NAME = "mount_root_rw" ]
+then
+    mount_root_rw
+    exit 0
+fi
+
+#check_reboot
+if [ $APP_NAME = "check_reboot" ]
+then
+
+    if [ -e $REBOOT_REQUIRED_MARK ] || [ -f $REBOOT_REQUIRED_MARK ]
+    then
+        echo "Found $REBOOT_REQUIRED_MARK mark - removing"
+        rm -f $REBOOT_REQUIRED_MARK
+
+        #TODO: add abort functionality here
+        echo "First boot completed: rebooting in 5 seconds"
+        echo 5 && sleep 1
+        echo 4 && sleep 1
+        echo 3 && sleep 1
+        echo 2 && sleep 1
+        echo 1 && sleep 1
+
+        reboot
+    else
+        echo "No reboot required"
+    fi
+
+    exit 0
+fi
+
+#Default behaviour (mount_root):
+if [ -e $REBOOT_REQUIRED_MARK ] || [ -f $REBOOT_REQUIRED_MARK ]
+then
+    echo "Found $REBOOT_REQUIRED_MARK mark - removing"
+    rm -f $REBOOT_REQUIRED_MARK
+fi
+
+if [ -e $FIRST_BOOT_MARK ] || [ -f $FIRST_BOOT_MARK ]
+then
+    echo "First boot: mounting root filesystem rw"
+    mount_root_rw
+
+    echo "removing $FIRST_BOOT_MARK"
+    rm -f $FIRST_BOOT_MARK
+
+    echo "creating $REBOOT_REQUIRED_MARK"
+    touch $REBOOT_REQUIRED_MARK
+else
+    if [ -e $REBOOT_REQUIRED_MARK ] || [ -f $REBOOT_REQUIRED_MARK ]
+    then
+        echo "Found $REBOOT_REQUIRED_MARK mark - removing"
+        echo "Mounting root filesystem rw"
+        mount_root_rw
+        rm -f $REBOOT_REQUIRED_MARK
+    fi
+
+    echo "Mounting root filesystem read-only"
+    mount_root_ro
+fi
+
+exit 0
