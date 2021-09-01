@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+# no script params are transfering
+
+# Configure script paths:
+SCRIPT_DIR="$(dirname $(readlink -f $0))"
+BIN_DIR="$(dirname $(readlink -f $SCRIPT_DIR))/bin"
+
+echo "script dir: $SCRIPT_DIR"
+echo "bin dir:    $BIN_DIR"
+
+echo "TARGET-PRE"
+
+exit 0

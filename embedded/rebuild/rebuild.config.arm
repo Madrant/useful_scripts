@@ -1,0 +1,44 @@
+# Build script configuration file
+
+ELDK_BIN_PATH=/opt/eldk-5.6/armv7a/sysroots/i686-eldk-linux/usr/bin
+ELDK_PREFIX=arm-linux-gnueabi-
+ELDK_SETUP_ENV=/opt/eldk-5.6/armv7a/environment-setup-armv7a-vfp-neon-linux-gnueabi
+ELDK_GCC_FOLDER=arm-linux-gnueabi
+
+ARCH=arm
+
+# Repository settings
+KERNEL_REPO_URL=http://rhodecode.localnet/Embedded/kernel/linux-2.6.37-ti-psp
+UBOOT_REPO_URL=http://rhodecode.localnet/Embedded/U-boot/u-boot-ti-2013-10
+BUILDROOT_REPO_URL=http://rhodecode.localnet/Embedded/buildroot/buildroot-2014.02
+
+CLONE_ALL=("$KERNEL_REPO_URL" "$UBOOT_REPO_URL" "$BUILDROOT_REPO_URL")
+
+# Build paths
+KERNEL_PATH=$SRC_PATH/linux-2.6.37-ti
+KERNEL_V2_PATH=
+
+UBOOT_PATH=$SRC_PATH/u-boot-ti
+
+BUILDROOT_PATH=$SRC_PATH/buildroot-2014.02
+
+# Configuration files
+KERNEL_CONFIG=cps/7mm-020_defconfig
+KERNEL_V2_CONFIG=
+
+UBOOT_CONFIG=7mm-020_config
+UBOOT_XPAR_PATH=
+
+#'-b' for big endian
+UBOOT_ENV_ENDIANESS=""
+UBOOT_ENV_SIZE=0x20000
+UBOOT_ENV_PADDING=0x00
+UBOOT_ENV_BIN=env_nand.bin
+UBOOT_ENV_TXT=env_nand.txt
+
+BUILDROOT_CONFIG_1=configs/cps/cps_arm_ro_defconfig
+BUILDROOT_CONFIG_2=configs/cps/Samolet/6dy-143_arm_defconfig
+BUILDROOT_OUTPUT_IMAGE=uramdisk
+
+# build all command:
+BUILD_ALL=("kernel" "uboot" "uboot_env" "rootfs")

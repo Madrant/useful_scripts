@@ -1,0 +1,45 @@
+# Build script configuration file
+
+ELDK_BIN_PATH=/opt/eldk-5.6/powerpc-4xx-softfloat/sysroots/i686-eldk-linux/usr/bin
+ELDK_PREFIX=powerpc-linux-
+ELDK_SETUP_ENV=/opt/eldk-5.6/powerpc-4xx-softfloat/environment-setup-ppc405-linux
+ELDK_GCC_FOLDER=powerpc-linux
+
+ARCH=powerpc
+
+# Repository settings
+KERNEL_REPO_URL=http://rhodecode.localnet/Embedded/kernel/linux-2.6.32
+UBOOT_REPO_URL=http://rhodecode.localnet/Embedded/U-boot/u-boot-ti-2013-10
+BUILDROOT_REPO_URL=http://rhodecode.localnet/Embedded/buildroot/buildroot-2014.02
+
+CLONE_ALL=("$KERNEL_REPO_URL" "$UBOOT_REPO_URL" "$BUILDROOT_REPO_URL")
+
+# Build paths
+KERNEL_PATH=$SRC_PATH/linux-xilinx-14.6.02
+KERNEL_V2_PATH=$SRC_PATH/linux-xilinx-2.6.32
+
+UBOOT_PATH=$SRC_PATH/u-boot-xlnx
+
+BUILDROOT_PATH=$SRC_PATH/buildroot-2014.02
+
+# Configuration files
+KERNEL_CONFIG=40x/cps/cps_defconfig
+KERNEL_V2_CONFIG=
+
+UBOOT_CONFIG=amc-sv_flash_config
+UBOOT_XPAR_PATH=board/xilinx/amc-sv
+
+#'-b' for big endian
+UBOOT_ENV_ENDIANESS=""
+UBOOT_ENV_SIZE=0x2000
+UBOOT_ENV_PADDING=0x00
+UBOOT_ENV_BIN=env_nand.bin
+UBOOT_ENV_TXT=env_nand.txt
+
+BUILDROOT_CONFIG_1=configs/cps/cps_powerpc_defconfig
+BUILDROOT_CONFIG_2=configs/cps/Samolet/6DOK/amc-sv_defconfig
+BUILDROOT_OUTPUT_IMAGE=rootfs.ubi
+BUILDROOT_TAR_IMAGE=rootfs.tar
+
+# build all command:
+BUILD_ALL=("kernel" "dtb" "uboot" "uboot_env" "rootfs")
