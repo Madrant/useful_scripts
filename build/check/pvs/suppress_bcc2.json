@@ -1,0 +1,309 @@
+{
+    "version": 1,
+    "warnings": [
+        {
+            "CodeCurrent": 1551887047,
+            "CodeNext": 12091719,
+            "CodePrev": 0,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'size_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 193124503,
+            "CodeNext": 986990,
+            "CodePrev": 33427310,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 772554519,
+            "CodeNext": 1183598,
+            "CodePrev": 66064238,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'uint__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 193124503,
+            "CodeNext": 986990,
+            "CodePrev": 33427310,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 772554519,
+            "CodeNext": 1183598,
+            "CodePrev": 66064238,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'uint__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 193124503,
+            "CodeNext": 986990,
+            "CodePrev": 33427310,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 772554519,
+            "CodeNext": 1183598,
+            "CodePrev": 66064238,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'uint__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 193124503,
+            "CodeNext": 986990,
+            "CodePrev": 33427310,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 772554519,
+            "CodeNext": 1183598,
+            "CodePrev": 66064238,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'uint__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3089763455,
+            "CodeNext": 4024174,
+            "CodePrev": 133785454,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'intptr_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3771476605,
+            "CodeNext": 4810606,
+            "CodePrev": 264333166,
+            "ErrorCode": "V677",
+            "FileName": "_stdint.h",
+            "Message": "Custom declaration of a standard 'uintptr_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 28453251,
+            "CodeNext": 981147075,
+            "CodePrev": 100,
+            "ErrorCode": "V677",
+            "FileName": "stddef.h",
+            "Message": "Custom declaration of a standard 'ptrdiff_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1880786502,
+            "CodeNext": 52101,
+            "CodePrev": 407189706,
+            "ErrorCode": "V677",
+            "FileName": "stddef.h",
+            "Message": "Custom declaration of a standard 'size_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 12094815,
+            "CodeNext": 100,
+            "CodePrev": 4276882462,
+            "ErrorCode": "V677",
+            "FileName": "_types.h",
+            "Message": "Custom declaration of a standard '_off_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1880934030,
+            "CodeNext": 100,
+            "CodePrev": 100,
+            "ErrorCode": "V677",
+            "FileName": "stddef.h",
+            "Message": "Custom declaration of a standard 'wint_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 192970231,
+            "CodeNext": 1005598,
+            "CodePrev": 4060419573,
+            "ErrorCode": "V677",
+            "FileName": "_timeval.h",
+            "Message": "Custom declaration of a standard 'time_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1545102615,
+            "CodeNext": 100,
+            "CodePrev": 2009118,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1545102615,
+            "CodeNext": 100,
+            "CodePrev": 2009118,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1545102615,
+            "CodeNext": 100,
+            "CodePrev": 2009118,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1545102615,
+            "CodeNext": 100,
+            "CodePrev": 2009118,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_int__t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3103778443,
+            "CodeNext": 796190,
+            "CodePrev": 33367582,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_char' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3825122241,
+            "CodeNext": 1655326,
+            "CodePrev": 66798110,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_short' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 775943795,
+            "CodeNext": 408094,
+            "CodePrev": 16693790,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_int' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3103773141,
+            "CodeNext": 805150,
+            "CodePrev": 33376542,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'u_long' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3495209014,
+            "CodeNext": 3778168981,
+            "CodePrev": 232589,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'ushort' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3778168981,
+            "CodeNext": 2272864388,
+            "CodePrev": 3495209014,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'uint' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 2272864388,
+            "CodeNext": 100,
+            "CodePrev": 3778168981,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'ulong' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3089379919,
+            "CodeNext": 3364718,
+            "CodePrev": 133650286,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'blkcnt_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 772513959,
+            "CodeNext": 1798174,
+            "CodePrev": 3246727924,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'clock_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 1380045611,
+            "CodeNext": 479086,
+            "CodePrev": 16764782,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'ino_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 694324939,
+            "CodeNext": 477038,
+            "CodePrev": 16762734,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'off_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 2758030542,
+            "CodeNext": 431982,
+            "CodePrev": 16652142,
+            "ErrorCode": "V677",
+            "FileName": "types.h",
+            "Message": "Custom declaration of a standard 'dev_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 4232683589,
+            "CodeNext": 125,
+            "CodePrev": 19713499,
+            "ErrorCode": "V634",
+            "FileName": "time.h",
+            "Message": "The priority of the '*' operation is higher than that of the '>>' operation. It's possible that parentheses should be used in the expression."
+        },
+        {
+            "CodeCurrent": 2622070866,
+            "CodeNext": 125,
+            "CodePrev": 19701211,
+            "ErrorCode": "V634",
+            "FileName": "time.h",
+            "Message": "The priority of the '*' operation is higher than that of the '>>' operation. It's possible that parentheses should be used in the expression."
+        },
+        {
+            "CodeCurrent": 0,
+            "CodeNext": 0,
+            "CodePrev": 0,
+            "ErrorCode": "Renew",
+            "FileName": " ",
+            "Message": "Your license will expire in _ days. Click 'Renew' to learn more or contact us at support@viva_.com."
+        },
+        {
+            "CodeCurrent": 5967,
+            "CodeNext": 0,
+            "CodePrev": 38161627,
+            "ErrorCode": "V677",
+            "FileName": "stdlib.h",
+            "Message": "Custom declaration of a standard 'div_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 11663,
+            "CodeNext": 0,
+            "CodePrev": 76565723,
+            "ErrorCode": "V677",
+            "FileName": "stdlib.h",
+            "Message": "Custom declaration of a standard 'ldiv_t' type. The declaration from system header files should be used instead."
+        },
+        {
+            "CodeCurrent": 3240143410,
+            "CodeNext": 29371295,
+            "CodePrev": 1047289,
+            "ErrorCode": "V677",
+            "FileName": "stdarg.h",
+            "Message": "Custom declaration of a standard 'va_list' type. The declaration from system header files should be used instead."
+        }
+    ]
+}
